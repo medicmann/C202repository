@@ -1,6 +1,8 @@
+package programmingassignment4;
+
 public class MyLinkedList<E> extends MyAbstractList<E> {
 
-    private Node<E> head, tail;
+    Node<E> head, tail;
 
     /** Create a default list */
     public MyLinkedList() {
@@ -151,20 +153,115 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         return result.toString();
     }
 
+
     /** Clear the list */
     public void clear() {
         head = tail = null;
     }
     
-    /**
-     methods for lab 8 should be implemented here
-     */
+    /** Returns true if this linked list contains the element e, otherwise returns false.*/
+    public boolean contains(E e) {
+        Node<E> temp = head;
+        while(temp != null) {
+            if(temp.element.equals(e)) {
+                return true;
+            }
+            temp = temp.next;
+        }
+        return false;
+    }
+    
+    public boolean contains(E e, int[] count) {
+        Node<E> temp = head;
+        for (int i = 0; i < size; i++) {
+            if(temp.element.equals(e)) {
+                count[0] = i;
+                return true;
+            }
+            temp = temp.next;
+        }
+        count[0] = size;
+        return false;
+    }
+    
+    
+    /** Returns the element at specified index of this list, returns null if index is invalid. */
+    public E get(int index) {
+        if(!isEmpty() && index < size) {
+            Node<E> temp = head;
+            int i = 1;
+            while(i < index) {
+                i++;
+                temp = temp.next;
+            }
+            return temp.element;
+        } else {
+            return null;
+        }
+    }
+    
+    /** Returns the index of the first matching element in this linked list, return -1 if no match. */
+    public int indexOf(E e) {
+        if (!isEmpty()){
+            Node<E> temp = head;
+            int i = 0;
+            while(i < size - 1) {
+                if (temp.element.equals(e)) {
+                    i++;
+                    break;
+                } else {
+                    temp = temp.next;
+                    i++;
+                }
+            }
+            return i;
+        } else {
+            return -1;
+        }
+    }
+    
+    /** Returns the index of the last matching element in this list, returns -1 if no match. */
+    public int lastIndexOf(E e) {
+        if (!isEmpty()){
+            Node<E> temp = head;
+            int i = 0;
+            int ans = 0;
+            while (i < size) {
+                if(temp.element.equals(e)) {
+                    ans = i;
+                    i++;
+                    temp = temp.next;
+                } else {
+                    i++;
+                    temp = temp.next;
+                }
+            }
+            return ans;
+        } else {
+            return -1;
+        }
+    }
+    
+    /** Replaces the element at specified index in this linked list with the specified element.  Returns the old element at specified index, otherwise returns null if index is invalid. */
+    public E set(int index, E e) {
+        if (head == null){
+            return null;
+        } 
+        else if (index >= size || tail == null){
+            return null;
+        } else {
+            E temp = get(index);
+            remove(index);
+            add(index, e);
+            return temp;
+        }
+    }
     
     
     
     
     
-    private static class Node<E> {
+    public static class Node<E> {
         E element;
         Node<E> next;
         public Node(E element) {

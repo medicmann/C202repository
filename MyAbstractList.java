@@ -1,3 +1,5 @@
+package programmingassignment4;
+
 /* DO NOT CHANGE THIS CODE */
 public abstract class MyAbstractList<E> implements MyList<E> {
 
@@ -40,3 +42,4 @@ public abstract class MyAbstractList<E> implements MyList<E> {
       return false;
   }
 }
+
